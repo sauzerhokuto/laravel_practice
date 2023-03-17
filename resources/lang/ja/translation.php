@@ -17,4 +17,5 @@ return [
   'Title' => 'タイトル',
   'Body' => '本文',
   'Post' => '投稿',
+  'Update' => '更新',
 ];
