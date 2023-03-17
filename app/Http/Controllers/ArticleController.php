@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Article;
+use App\Http\Requests\Article\StoreArticleRequest;
+
 
 class ArticleController extends Controller
 {
@@ -15,22 +18,31 @@ class ArticleController extends Controller
         return view('article.index');
     }
 
-    // //記事の作成画面(store)
-    // public function store()
-    // {
+    // //記事の作成画面(create)
+    public function create()
+    {
+        return view('article.register');
+    }
 
+    //記事の作成(store)
+    public function register(StoreArticleRequest $request)
+    {
 
-    //     return view();
-    // }
+        $article = new Article;
 
-    // //記事の作成(create)
-    // public function create()
-    // {
+        $article->fill([
+            'title' => $request->name,
+            'body' => $request->body,
+        ])->save();
 
-    //     全ての記事を取得
+        return redirect()->route('articles.index')
+            ->with('staus', '投稿が完了しました。');
 
-    //     return view();
-    // }
+        // $article = Article::create([
+        //     'title' => $data['title'],
+        //     'body' => $data['body'],
+        // ]);
+    }
 
     // //記事の編集画面(show)
     // public function show()
