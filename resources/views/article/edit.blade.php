@@ -1,14 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
+
+<!-- フラッシュメッセージ -->
+  @if (session('status'))
+    <div class="alert alert-success" role="alert">
+      <strong>{{ session('status') }}</strong>
+    </div>
+  @endif
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('translation.Post') }}</div>
+                <div class="card-header">{{ __('translation.Update') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('article.register') }}">
+                    <form method="POST" action="{{ route('article.edit') }}">
                         @csrf
 
                         <div class="row mb-3">
@@ -42,7 +49,7 @@
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('translation.Post') }}
+                                    {{ __('translation.Update') }}
                                 </button>
                             </div>
                         </div>

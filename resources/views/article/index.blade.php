@@ -14,13 +14,20 @@
 
   <h1>記事一覧</h1>
   <div class="row">
-    <form action="{{ route('article.store') }}" method="get">
+    <form action="{{ route('article.create') }}" method="get">
       <p class="register-button">
         <button>記事投稿</button>
       </p>
     </form>
   </div>
 
+  <div class="row">
+    <form action="{{ route('article.edit') }}" method="get">
+      <p class="register-button">
+        <button>記事編集</button>
+      </p>
+    </form>
+  </div>
 
   <table class="table">
     <thead>
