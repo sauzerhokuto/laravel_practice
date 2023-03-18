@@ -51,18 +51,27 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                    {{ __('translation.Menu') }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    {{-- <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('translation.Logout') }}
-                                    </a>
+                                    </a> --}}
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    {{-- ログアウト --}}
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-inline">
                                         @csrf
+                                        <button type="submit" class="dropdown-item">{{ __('translation.Logout') }}</button>
+                                    </form>
+
+                                    {{-- 記事投稿 --}}
+                                    <form id="article-create" action="{{ route('article.create') }}" method="POST" class="d-inline">
+                                        @method('GET')
+                                        @csrf
+                                        <button type="submit" class="dropdown-item">{{ __('translation.Article Create') }}</button>
                                     </form>
                                 </div>
                             </li>

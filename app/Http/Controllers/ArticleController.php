@@ -13,9 +13,9 @@ class ArticleController extends Controller
     //記事の一覧(index)
     public function index()
     {
-        // $articles = Article::all();
+        $articles = Article::all();
 
-        return view('article.index');
+        return view('article.index', compact('articles'));
     }
 
     // //記事の作成画面(create)
@@ -24,25 +24,18 @@ class ArticleController extends Controller
         return view('article.register');
     }
 
-    //記事の作成(store)
+    //記事の作成(register)
     public function register(ArticleRequest $request)
     {
-
-        // $article = new Article;
-
-        // $article->fill([
-        //     'title' => $request->name,
-        //     'body' => $request->body,
-        // ])->save();
-
-
+        $user = Auth::user();
 
         $article = Article::create([
             'title' => $request->title,
             'body' => $request->body,
+            'user_id' => $user->id,
         ]);
         return redirect()->route('articles.index')
-            ->with('staus', '投稿が完了しました。');
+            ->with('status', '投稿が完了しました。');
     }
 
     // //記事の編集画面(show)
@@ -55,9 +48,10 @@ class ArticleController extends Controller
     // }
 
     // //記事の編集(edit)
-    public function edit()
+    public function edit($id)
     {
-        return view('article.edit');
+        $article = Article::find($id);
+        return view('article.edit', compact('article'));
     }
 
     // //記事の更新(update)
@@ -72,15 +66,15 @@ class ArticleController extends Controller
         ])->save();
 
         return redirect()->back()
-            ->with('statu', '更新が完了しました。');
+            ->with('status', '更新が完了しました。');
     }
 
     // //記事の削除(destroy)
-    public function destroy(ArticleRequest $request, $id)
+    public function destroy($id)
     {
         $article = Article::find($id);
         $article->delete();
         return redirect()->back()
-            ->with('statu', '更新が完了しました。');
+            ->with('status', '削除が完了しました。');
     }
 }

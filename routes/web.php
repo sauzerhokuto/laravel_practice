@@ -22,15 +22,15 @@ Auth::routes();
 // 記事一覧
 Route::get('/', [App\Http\Controllers\ArticleController::class, 'index'])->name('articles.index');
 // 記事登録ページ
-Route::get('/create', [App\Http\Controllers\ArticleController::class, 'create'])->name('article.create');
+Route::get('/article/create', [App\Http\Controllers\ArticleController::class, 'create'])->name('article.create');
 // 記事作成
-Route::post('/register', [App\Http\Controllers\ArticleController::class, 'register'])->name('article.register');
+Route::post('/article/register', [App\Http\Controllers\ArticleController::class, 'register'])->name('article.register');
 // 記事更新ページ
-Route::get('/edit', [App\Http\Controllers\ArticleController::class, 'edit'])->name('article.edit');
+Route::get('/article/edit/{id}', [App\Http\Controllers\ArticleController::class, 'edit'])->name('article.edit');
 // 記事更新
-Route::get('/update', [App\Http\Controllers\ArticleController::class, 'update'])->name('article.update');
+Route::put('/article/update/{id}', [App\Http\Controllers\ArticleController::class, 'update'])->name('article.update');
 // 記事削除
-Route::get('/delete', [App\Http\Controllers\ArticleController::class, 'destroy'])->name('article.destroy');
+Route::get('/article/delete/{id}', [App\Http\Controllers\ArticleController::class, 'destroy'])->name('article.destroy');
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
