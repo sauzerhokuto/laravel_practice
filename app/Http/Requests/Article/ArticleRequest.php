@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Article;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -23,7 +23,16 @@ class ArticleRequest extends FormRequest
     {
         return [
             'title' => 'required|max:255',
-            'content' => 'required',
+            'body' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'title.required' => 'タイトルは必須項目です。',
+            'title.max' => 'タイトルは255文字以内です。',
+            'body.required' => '本文は必須項目です。',
         ];
     }
 }

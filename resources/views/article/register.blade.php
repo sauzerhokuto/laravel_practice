@@ -8,9 +8,8 @@
                 <div class="card-header">{{ __('translation.Post') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('article.register') }}">
+                    <form id="article.register" method="POST" action="{{ route('article.register') }}">
                         @csrf
-
                         <div class="row mb-3">
                             <label for="title" class="col-md-4 col-form-label text-md-end">{{ __('translation.Title') }}</label>
 

@@ -10,49 +10,31 @@
   @endif
 
 @section('content')
-<div class="admin-list-body">
+  <div class="admin-list-body">
 
-  <h1>記事一覧</h1>
-  <div class="row">
-    <form action="{{ route('article.create') }}" method="get">
-      <p class="register-button">
-        <button>記事投稿</button>
-      </p>
-    </form>
+    <h1>記事一覧</h1>
+      @auth
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">タイトル</th>
+              <th scope="col">記事</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @foreach($articles as $article)
+              <tr>
+                <td>{{ $article->title }}</td>
+                <td>{{ $article->body }}</td>
+                <td>
+                  <a href={{ route('article.edit',['id' => $article->id]) }}>編集</a>
+                  <a href={{ route('article.destroy',['id' => $article->id]) }}>削除</a>
+                </td>
+              </tr>
+            @endforeach
+          </tbody>
+        </table>
+      @endauth
   </div>
-
-  <div class="row">
-    <form action="{{ route('article.edit') }}" method="get">
-      <p class="register-button">
-        <button>記事編集</button>
-      </p>
-    </form>
-  </div>
-
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">タイトル</th>
-        <th scope="col">記事</th>
-      </tr>
-    </thead>
-
-    {{-- @foreach($articles as $article)
-    <tr>
-      <td>{{ $article->admin_name }}</td>
-      <td> --}}
-        {{-- 編集ボタン --}}
-        {{-- <a href="{{ route('article.edit',['article'=>$article->id]) }}">編集</a> --}}
-
-        {{-- 削除ボタン --}}
-        {{-- <a href="#" onclick="return confirm('本当に削除しますか？') ? document.getElementById('destroy->{{$article->id}}').submit() : false;">削除</a>
-        <form method="post" id="destroy->{{$article->id}}" name="destroy" action="{{ route('article.destroy', ['article'=>$article->id]) }}">
-          @csrf
-          {{ method_field('DELETE') }}
-          <input type="hidden" name="id" value="{{$article->id}}">
-        </form>
-      </td>
-    </tr> --}}
-  </table>
-</div>
 @endsection

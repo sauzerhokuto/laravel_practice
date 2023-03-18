@@ -15,14 +15,15 @@
                 <div class="card-header">{{ __('translation.Update') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('article.edit') }}">
+                    <form method="POST" action="{{ route('article.update',['id' => $article->id]) }}">
+                        @method('PUT')
                         @csrf
 
                         <div class="row mb-3">
                             <label for="title" class="col-md-4 col-form-label text-md-end">{{ __('translation.Title') }}</label>
 
                             <div class="col-md-6">
-                                <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" required autocomplete="title" autofocus>
+                                <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" required value="{{ $article->title }}">
 
                                 @error('title')
                                     <span class="invalid-feedback" role="alert">
@@ -36,7 +37,7 @@
                             <label for="body" class="col-md-4 col-form-label text-md-end">{{ __('translation.Body') }}</label>
 
                             <div class="col-md-6">
-                                <textarea rows="5" cols="10" id="body" type="body" class="form-control @error('body') is-invalid @enderror" name="body" required autocomplete="body"></textarea>
+                                <textarea rows="5" cols="10" id="body" type="body" class="form-control @error('body') is-invalid @enderror" name="body" required value="{{ $article->body }}"></textarea>
 
                                 @error('body')
                                     <span class="invalid-feedback" role="alert">
