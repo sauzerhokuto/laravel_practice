@@ -73,6 +73,12 @@
                                         @csrf
                                         <button type="submit" class="dropdown-item">{{ __('translation.Article Create') }}</button>
                                     </form>
+
+                                    <form id="mypage" action="{{ route('mypage',['id' => Auth::user()->id]) }}" method="POST">
+                                        @method('GET')
+                                        @csrf
+                                        <button type="submito" class="dropdown-item">{{ __('translation.mypage') }}</button>
+                                    </form>
                                 </div>
                             </li>
                         @endguest
