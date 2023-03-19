@@ -32,6 +32,9 @@ Route::put('/article/update/{id}', [App\Http\Controllers\ArticleController::clas
 // 記事削除
 Route::get('/article/delete/{id}', [App\Http\Controllers\ArticleController::class, 'destroy'])->name('article.destroy');
 
+// マイページ
+Route::get('/mypage/{id}', [App\Http\Controllers\MypageController::class, 'mypage'])->name('mypage');
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
