@@ -14,8 +14,10 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::all();
+        $user = Auth::user();
+        // dd($articles);
 
-        return view('article.index', compact('articles'));
+        return view('article.index', compact('articles', 'user'));
     }
 
     // //記事の作成画面(create)

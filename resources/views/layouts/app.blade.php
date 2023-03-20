@@ -61,12 +61,6 @@
                                         {{ __('translation.Logout') }}
                                     </a> --}}
 
-                                    {{-- ログアウト --}}
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-inline">
-                                        @csrf
-                                        <button type="submit" class="dropdown-item">{{ __('translation.Logout') }}</button>
-                                    </form>
-
                                     {{-- 記事投稿 --}}
                                     <form id="article-create" action="{{ route('article.create') }}" method="POST" class="d-inline">
                                         @method('GET')
@@ -74,10 +68,23 @@
                                         <button type="submit" class="dropdown-item">{{ __('translation.Article Create') }}</button>
                                     </form>
 
+                                    {{-- マイページ --}}
                                     <form id="mypage" action="{{ route('mypage',['id' => Auth::user()->id]) }}" method="POST">
                                         @method('GET')
                                         @csrf
                                         <button type="submito" class="dropdown-item">{{ __('translation.mypage') }}</button>
+                                    </form>
+
+                                    {{-- アカウント削除 --}}
+                                    {{-- <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-inline"> --}}
+                                        @csrf
+                                        <button type="submit" class="dropdown-item">{{ __('アカウント削除') }}</button>
+                                    {{-- </form> --}}
+
+                                    {{-- ログアウト --}}
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-inline">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item">{{ __('translation.Logout') }}</button>
                                     </form>
                                 </div>
                             </li>

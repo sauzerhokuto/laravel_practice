@@ -27,10 +27,12 @@
               <tr>
                 <td>{{ $article->title }}</td>
                 <td>{{ $article->body }}</td>
-                <td>
-                  <a href={{ route('article.edit',['id' => $article->id]) }}>編集</a>
-                  <a href={{ route('article.destroy',['id' => $article->id]) }}>削除</a>
-                </td>
+                @if(Auth::id() === $article->user_id)
+                  <td>
+                    <a href={{ route('article.edit',['id' => $article->id]) }}>編集</a>
+                    <a href={{ route('article.destroy',['id' => $article->id]) }}>削除</a>
+                  </td>
+                @endif
               </tr>
             @endforeach
           </tbody>
