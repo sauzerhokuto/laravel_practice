@@ -35,7 +35,8 @@ Route::get('/article/delete/{id}', [App\Http\Controllers\ArticleController::clas
 // マイページ
 Route::get('/mypage/{id}', [App\Http\Controllers\MypageController::class, 'mypage'])->name('mypage');
 
+//アカウント削除
+Route::delete('/user/delete/{id}', [App\Http\Controllers\UserController::class, 'destroy'])->name('user.destroy');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+// ホーム画面
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

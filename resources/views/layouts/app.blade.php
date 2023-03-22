@@ -32,6 +32,12 @@
                     <ul class="navbar-nav me-auto">
 
                     </ul>
+                    {{-- フラッシュメッセージ --}}
+                     @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            <strong>{{ session('status') }}</strong>
+                        </div>
+                    @endif
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
@@ -76,10 +82,11 @@
                                     </form>
 
                                     {{-- アカウント削除 --}}
-                                    {{-- <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-inline"> --}}
+                                    <form id="destroy" action="{{ route('user.destroy',['id' => Auth::user()->id]) }}" method="POST" class="d-inline">
+                                        @method('DELETE')
                                         @csrf
                                         <button type="submit" class="dropdown-item">{{ __('アカウント削除') }}</button>
-                                    {{-- </form> --}}
+                                    </form>
 
                                     {{-- ログアウト --}}
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-inline">

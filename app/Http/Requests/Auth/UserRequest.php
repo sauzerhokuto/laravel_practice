@@ -22,7 +22,7 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255', 'unique:users'],
+            'name' => ['required', 'string', 'max:255',],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             // 'password' => 'regex:/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z\-]{8,24}$/',
         ];
@@ -32,6 +32,7 @@ class UserRequest extends FormRequest
     {
         return [
             'name.required' => '名前は必須項目です。',
+            'name.string' => '名前には文字でお願いします。',
             'name.max' => '名前は255文字までです。',
             'name.unique' => 'この名前はすでに登録済です。',
             'email.email' => 'メールアドレスの形式で入力してください',

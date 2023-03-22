@@ -47,4 +47,14 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Article');
     }
+
+    // 子要素の記事を削除
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($user) {
+            $user->articles()->delete();
+        });
+    }
 }
