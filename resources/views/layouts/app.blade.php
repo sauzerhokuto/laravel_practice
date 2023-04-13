@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>記事投稿サイト</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -15,6 +15,16 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <script>
+        function check() {
+            if (window.confirm('削除してよろしいですか？')) { // 確認ダイアログを表示
+                return true; // 「OK」時は送信を実行
+            } else { // 「キャンセル」時の処理
+                window.alert('キャンセルされました'); // 警告ダイアログを表示
+                return false; // 送信を中止
+            }
+        }
+    </script>
 </head>
 <body>
     <div id="app">
@@ -26,6 +36,7 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
@@ -68,25 +79,27 @@
                                     </a> --}}
 
                                     {{-- 記事投稿 --}}
-                                    <form id="article-create" action="{{ route('article.create') }}" method="POST" class="d-inline">
+                                    {{-- <form id="article-create" action="{{ route('article.create') }}" method="POST" class="d-inline">
                                         @method('GET')
                                         @csrf
                                         <button type="submit" class="dropdown-item">{{ __('translation.Article Create') }}</button>
-                                    </form>
+                                    </form> --}}
 
                                     {{-- マイページ --}}
                                     <form id="mypage" action="{{ route('mypage',['id' => Auth::user()->id]) }}" method="POST">
                                         @method('GET')
                                         @csrf
-                                        <button type="submito" class="dropdown-item">{{ __('translation.mypage') }}</button>
+                                        <button type="submit" class="dropdown-item">{{ __('translation.mypage') }}</button>
                                     </form>
 
+
                                     {{-- アカウント削除 --}}
-                                    <form id="destroy" action="{{ route('user.destroy',['id' => Auth::user()->id]) }}" method="POST" class="d-inline">
+                                    <form id="destroy" action="{{ route('user.destroy',['id' => Auth::user()->id]) }}" onSubmit="return check()" method="POST" class="d-inline">
                                         @method('DELETE')
                                         @csrf
                                         <button type="submit" class="dropdown-item">{{ __('アカウント削除') }}</button>
                                     </form>
+
 
                                     {{-- ログアウト --}}
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-inline">

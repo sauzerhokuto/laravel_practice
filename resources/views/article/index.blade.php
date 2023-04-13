@@ -14,6 +14,16 @@
 
     <h1>記事一覧</h1>
       @auth
+
+      {{-- 検索機能 --}}
+      <div>
+        <form action="{{ route('articles.index') }}" method="GET">
+        @csrf
+          <input type="text" name="keyword">
+          <input type="submit" value="検索">
+        </form>
+      </div>
+
         <table class="table">
           <thead>
             <tr>
@@ -29,8 +39,8 @@
                 <td>{{ $article->body }}</td>
                 @if(Auth::id() === $article->user_id)
                   <td>
-                    <a href={{ route('article.edit',['id' => $article->id]) }}>編集</a>
-                    <a href={{ route('article.destroy',['id' => $article->id]) }}>削除</a>
+                    <a href="{{ route('article.edit',['id' => $article->id]) }}" style="margin-right: 10px;">編集</a>
+                    <a onclick="return confirm('削除してよろしいですか？')" href={{ route('article.destroy',['id' => $article->id]) }}>削除</a>
                   </td>
                 @endif
               </tr>

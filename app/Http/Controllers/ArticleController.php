@@ -8,14 +8,24 @@ use App\Models\Article;
 use App\Http\Requests\Article\ArticleRequest;
 
 
+
 class ArticleController extends Controller
 {
     //記事の一覧(index)
-    public function index()
+    public function index(Request $request)
     {
-        $articles = Article::all();
+        $article = Article::query();
         $user = Auth::user();
         // dd($articles);
+
+        /* キーワードから検索処理 */
+        $keyword = $request->input('keyword');
+        if (!empty($keyword)) { //$keyword　が空ではない場合、検索処理を実行します
+            $article->where('title', 'LIKE', "%{$keyword}%")
+                ->orWhere('body', 'LIKE', "%{$keyword}%");
+        }
+
+        $articles = $article->paginate(5);
 
         return view('article.index', compact('articles', 'user'));
     }
